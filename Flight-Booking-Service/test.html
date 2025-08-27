@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Test Booking API</h2>
+    <button onclick="testBooking()">Create Booking</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testBooking() {
+            try {
+                const response = await fetch('http://localhost:5000/api/v1/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        flightId: 1,
+                        userId: 1,
+                        noofSeats: 2
+                    })
+                });
+                const data = await response.json();
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
